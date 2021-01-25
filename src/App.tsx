@@ -7,6 +7,7 @@ import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import Badge from "@material-ui/core/Badge";
 
 import { Wrapper } from "./App.styles";
+import { functionalUpdate } from "react-query/types/core/utils";
 
 export type CartItemType = {
   id: number;
@@ -27,8 +28,12 @@ const App = () => {
     "products",
     getProducts
   );
+  const getTotalitem = () => null;
+  const handleAddToCart = () => null;
+  const handleRemoveFromCart = () => null;
+  if (isLoading) return <LinearProgress />; //os indicadores de progreso informan a los usuarios acerca del estado de procesos activos, tales como cargar una aplicación, enviar un formulario o guardar actualizaciones.
   console.log(data);
-  return <div className="App"></div>;
+  return <div className="App">Start</div>;
 };
 
 export default App;
