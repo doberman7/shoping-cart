@@ -9,7 +9,7 @@ import Badge from "@material-ui/core/Badge";
 import Item from "./Item/Item";
 
 //estilos
-import { Wrapper } from "./App.styles";
+import { Wrapper, StyledButton } from "./App.styles";
 import { functionalUpdate } from "react-query/types/core/utils";
 
 export type CartItemType = {
@@ -27,27 +27,26 @@ const getProducts = async (): Promise<CartItemType[]> => //data returned from fe
   await (await fetch("https://fakestoreapi.com/products")).json();
 
 const App = () => {
-  const [cartOpen, serCartOpen] = useState(false);
-  const [cartItem, serCartItem] = useState([] as CartItemType[]); //the type of the cartItem its defined here
+  const [cartOpen, setCartOpen] = useState(false);
+  const [cartItem, setCartItem] = useState([] as CartItemType[]); //the type of the cartItem its defined here
 
   const { data, isLoading, error } = useQuery<CartItemType[]>(
     "products",
     getProducts
   );
-  const getTotalitem = () => null;
+  const getTotalItems = (items: CartItemType[]) => null;
   const handleAddToCart = (clickedItem: CartItemType) => null;
   const handleRemoveFromCart = () => null;
   if (isLoading) return <LinearProgress />; //os indicadores de progreso informan a los usuarios acerca del estado de procesos activos, tales como cargar una aplicación, enviar un formulario o guardar actualizaciones.
   if (error) return <div>Something went wrong ...</div>;
-
-  console.log(data);
   return (
     <Wrapper>
-      <Drawer
-        anchor="right"
-        open={cartOpen}
-        onClose={() => serCartOpen(false)}
-      ></Drawer>
+      <Drawer anchor="right" open={cartOpen} onClose={() => setCartOpen(false)}>
+        <p>Carto Goes here</p>
+      </Drawer>
+      <StyledButton onClick={() => setCartOpen(true)}>
+        <Badge badgeContent={getTotalItems(cartItem)} color="error"></Badge>
+      </StyledButton>
       <Grid container spacing={3}>
         {data?.map((item) => (
           <Grid item key={item.id} xs={12} sm={4}>
