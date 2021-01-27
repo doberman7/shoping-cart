@@ -27,6 +27,9 @@ const getProducts = async (): Promise<CartItemType[]> => //data returned from fe
   await (await fetch("https://fakestoreapi.com/products")).json();
 
 const App = () => {
+  const [cartOpen, serCartOpen] = useState(false);
+  const [cartItem, serCartItem] = useState([] as CartItemType[]); //the type of the cartItem its defined here
+
   const { data, isLoading, error } = useQuery<CartItemType[]>(
     "products",
     getProducts
@@ -40,6 +43,11 @@ const App = () => {
   console.log(data);
   return (
     <Wrapper>
+      <Drawer
+        anchor="right"
+        open={cartOpen}
+        onClose={() => serCartOpen(false)}
+      ></Drawer>
       <Grid container spacing={3}>
         {data?.map((item) => (
           <Grid item key={item.id} xs={12} sm={4}>
