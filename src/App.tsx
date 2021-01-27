@@ -51,6 +51,7 @@ const App = () => {
       </Drawer>
       <StyledButton onClick={() => setCartOpen(true)}>
         <Badge badgeContent={getTotalItems(cartItems)} color="error"></Badge>
+        <AddShoppingCartIcon />
       </StyledButton>
       <Grid container spacing={3}>
         {data?.map((item) => (
