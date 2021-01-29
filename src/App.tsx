@@ -40,12 +40,14 @@ const App = () => {
 
   const handleAddToCart = (clickedItem: CartItemType) => {
     setCartItems((prevState) => {
-      console.log(prevState);
+      console.log(typeof prevState);
       //the item its already in the cart
       const isItemInCart = prevState.find((item) => item.id === clickedItem.id);
       if (isItemInCart) {
         return prevState.map((item) =>
-          item.id === clickedItem.id ? { ...item, amount: item.amount++ } : item
+          item.id === clickedItem.id
+            ? { ...item, amount: item.amount + 1 }
+            : item
         );
       }
       return [...prevState, { ...clickedItem, amount: 1 }];
