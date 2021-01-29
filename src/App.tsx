@@ -35,9 +35,24 @@ const App = () => {
     "products",
     getProducts
   );
-  const getTotalItems = (items: CartItemType[]) => null;
-  const handleAddToCart = (clickedItem: CartItemType) => null;
+  const getTotalItems = (items: CartItemType[]) =>
+    items.reduce((acumulator: number, item) => acumulator + item.amount, 0); //54:11
+
+  const handleAddToCart = (clickedItem: CartItemType) => {
+    setCartItems((prevState) => {
+      console.log(prevState);
+      //the item its already in the cart
+      const isItemInCart = prevState.find((item) => item.id === clickedItem.id);
+      if (isItemInCart) {
+        return prevState.map((item) =>
+          item.id === clickedItem.id ? { ...item, amount: item.amount++ } : item
+        );
+      }
+      return [...prevState, { ...clickedItem, amount: 1 }];
+    });
+  };
   const handleRemoveFromCart = () => null;
+
   if (isLoading) return <LinearProgress />; //os indicadores de progreso informan a los usuarios acerca del estado de procesos activos, tales como cargar una aplicación, enviar un formulario o guardar actualizaciones.
   if (error) return <div>Something went wrong ...</div>;
   return (
