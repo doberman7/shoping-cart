@@ -68,26 +68,44 @@ const App = () => {
   if (isLoading) return <LinearProgress />; //os indicadores de progreso informan a los usuarios acerca del estado de procesos activos, tales como cargar una aplicación, enviar un formulario o guardar actualizaciones.
   if (error) return <div>Something went wrong ...</div>;
   return (
-    <Wrapper>
-      <Drawer anchor="right" open={cartOpen} onClose={() => setCartOpen(false)}>
-        <Cart
-          cartItems={cartItems}
-          addToCart={handleAddToCart}
-          removeFromCart={handleRemoveFromCart}
-        />
-      </Drawer>
-      <StyledButton onClick={() => setCartOpen(true)}>
-        <Badge badgeContent={getTotalItems(cartItems)} color="error"></Badge>
-        <AddShoppingCartIcon />
-      </StyledButton>
-      <Grid container spacing={3}>
-        {data?.map((item) => (
-          <Grid item key={item.id} xs={12} sm={4}>
-            <Item item={item} handleAddToCart={handleAddToCart} />
-          </Grid>
-        ))}
-      </Grid>
-    </Wrapper>
+    <>
+      <h1>Fake Store</h1>
+      <p>Hi, i'm Ivan Rubio this is an app that simulates a onLine store</p>
+      <p>This is a version of the tutorial</p>
+      <a href="https://www.youtube.com/watch?v=sfmL6bGbiN8&t=903s">
+        {" "}
+        Build a Shopping Cart with React and TypeScript by Tomas Weber
+      </a>
+      <p>
+        {" "}
+        The idea is to Learn the fundamentals of Typescript, Material UI, Styled
+        Components and React-Query
+      </p>
+      <Wrapper>
+        <Drawer
+          anchor="right"
+          open={cartOpen}
+          onClose={() => setCartOpen(false)}
+        >
+          <Cart
+            cartItems={cartItems}
+            addToCart={handleAddToCart}
+            removeFromCart={handleRemoveFromCart}
+          />
+        </Drawer>
+        <StyledButton onClick={() => setCartOpen(true)}>
+          <Badge badgeContent={getTotalItems(cartItems)} color="error"></Badge>
+          <AddShoppingCartIcon />
+        </StyledButton>
+        <Grid container spacing={3}>
+          {data?.map((item) => (
+            <Grid item key={item.id} xs={12} sm={4}>
+              <Item item={item} handleAddToCart={handleAddToCart} />
+            </Grid>
+          ))}
+        </Grid>
+      </Wrapper>
+    </>
   );
 };
 
